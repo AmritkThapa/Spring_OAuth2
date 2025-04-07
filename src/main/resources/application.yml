@@ -1,0 +1,46 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: SpringOauth2
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/oauth
+    username: root
+    password: root
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+              - openid
+#          facebook:
+#            client-id: ${FB_CLIENT_ID}
+#            client-secret: ${FB_CLIENT_SECRET}
+#            scope:
+#              - email
+#              - public_profile
+#              - user_friends
+#          facebook:
+#            client-id: ${GOOGLE_CLIENT_ID}
+#            client-secret: ${GOOGLE_CLIENT_SECRET}
+#            scope:
+#              - email
+#              - profile
+#              - openid
+
+
+jwt:
+  secret: VXNlclNlY3JldEtleUZvckpXVEF1dGhlbnRpY2F0aW9u
+
