@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   application:
     name: SpringOauth2
@@ -25,22 +25,20 @@ spring:
               - email
               - profile
               - openid
-#          facebook:
-#            client-id: ${FB_CLIENT_ID}
-#            client-secret: ${FB_CLIENT_SECRET}
-#            scope:
-#              - email
-#              - public_profile
-#              - user_friends
-#          facebook:
-#            client-id: ${GOOGLE_CLIENT_ID}
-#            client-secret: ${GOOGLE_CLIENT_SECRET}
-#            scope:
-#              - email
-#              - profile
-#              - openid
+          facebook:
+            client-id: ${FB_CLIENT_ID}
+            client-secret: ${FB_CLIENT_SECRET}
+            scope:
+              - email
+              - public_profile
+              - user_friends
+        provider:
+          facebook:
+            authorization-uri: ${AUTH_URI}
+            token-uri: ${TOKEN_URI}
+            user-info-uri: ${USER_INFO_URI}
 
 
 jwt:
-  secret: VXNlclNlY3JldEtleUZvckpXVEF1dGhlbnRpY2F0aW9u
+  secret: ${JWT_SECRET}
 

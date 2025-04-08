@@ -20,6 +20,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -44,16 +45,25 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         OAuth2User oAuth2User = oauthToken.getPrincipal();
         String email = oAuth2User.getAttribute("email");
         String name = oAuth2User.getAttribute("name");
-        String profileImage = oAuth2User.getAttribute("picture");
+        String profileImage = "";
         String authProvider = oauthToken.getAuthorizedClientRegistrationId().toUpperCase();
         String oauthId = "";
         try {
             AuthProvider provider = AuthProvider.valueOf(authProvider);
             if (provider == AuthProvider.GOOGLE){
                 oauthId = oAuth2User.getAttribute("sub");
+                profileImage = oAuth2User.getAttribute("picture");
             }
             else if (provider == AuthProvider.FACEBOOK) {
                 oauthId = oAuth2User.getAttribute("id");
+                Map<String, Object> pictureObj = oAuth2User.getAttribute("picture");
+                if (pictureObj != null) {
+                    @SuppressWarnings("unchecked")
+                    Map<String, Object> dataObj = (Map<String, Object>) pictureObj.get("data");
+                    if (dataObj != null) {
+                        profileImage = (String) dataObj.get("url");
+                    }
+                }
             }
         }
         catch (IllegalArgumentException e){
