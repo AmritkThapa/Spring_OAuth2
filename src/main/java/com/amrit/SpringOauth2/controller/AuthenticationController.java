@@ -1,6 +1,7 @@
 package com.amrit.SpringOauth2.controller;
 
 import com.amrit.SpringOauth2.dto.request.AuthenticationRequest;
+import com.amrit.SpringOauth2.dto.response.ApiResponse;
 import com.amrit.SpringOauth2.dto.response.AuthenticationResponse;
 import com.amrit.SpringOauth2.service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest){
-        return ResponseEntity.ok(authenticationService.authenticate(authenticationRequest)).getBody();
-//        return authenticationService.authenticate(authenticationRequest);
+    public ApiResponse<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest){
+        return authenticationService.authenticate(authenticationRequest);
     }
     @GetMapping("/hello")
     public AuthenticationResponse hello(){

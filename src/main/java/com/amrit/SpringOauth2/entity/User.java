@@ -31,13 +31,6 @@ public class User implements UserDetails {
     @Column(name = "profile_image")
     private String profileImage;
 
-    @Column(name= "auth_provider_id")
-    private String authProviderId;
-
-    @Column(name= "auth_provider")
-    @Enumerated(EnumType.STRING)
-    private AuthProvider authProvider;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
